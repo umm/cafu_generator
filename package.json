@@ -1,0 +1,31 @@
+{
+  "name": "@umm/cafu_generator",
+  "version": "1.0.0",
+  "description": "C# script generator for CAFU",
+  "homepage": "https://github.com/umm-projects/cafu_generator",
+  "bugs": {
+    "url": "https://github.com/umm-projects/cafu_generator/issues"
+  },
+  "scripts": {
+    "umm:init": "$(npm bin)/umm-init",
+    "umm:install": "$(npm bin)/umm-install",
+    "umm:uninstall": "$(npm bin)/umm-uninstall",
+    "postinstall": "npm run --silent umm:install",
+    "postuninstall": "npm run --silent umm:uninstall",
+    "build:test": "tar -tf $(npm pack -s) && $(npm bin)/rimraf $_"
+  },
+  "author": "Tetsuya Mori",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:umm-projects/cafu_generator"
+  },
+  "files": [
+    "Assets",
+    "scripts"
+  ],
+  "dependencies": {
+    "@umm/scripts": "umm-projects/scripts#^1.0.0"
+  },
+  "devDependencies": {}
+}
