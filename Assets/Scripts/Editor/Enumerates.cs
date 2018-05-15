@@ -8,6 +8,7 @@
 
     public enum ParentLayerType
     {
+        Application,
         Presentation,
         Domain,
         Data,
@@ -15,6 +16,8 @@
 
     public enum LayerType
     {
+        Enumerates,
+        Constants,
         View,
         Presenter,
         Controller,
