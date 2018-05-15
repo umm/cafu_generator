@@ -125,7 +125,7 @@ namespace CAFU.Generator
 
             // シーン名を収集
             SceneNameList = AssetDatabase
-                .FindAssets("t:Scene", new[] {"Assets/Scenes"})
+                .FindAssets("t:Scene", new[] {"Assets"})
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Select(Path.GetFileNameWithoutExtension)
                 .Where(x => Regex.IsMatch(x, $"^{ProjectContext?.SceneNamePrefix}"))
