@@ -87,6 +87,11 @@ namespace CAFU.Generator
             EditorGUI.indentLevel--;
             Overwrite = EditorGUILayout.Toggle("Overwrite?", Overwrite);
             EditorGUILayout.Space();
+            if (ProjectContext == default(IProjectContext))
+            {
+                EditorGUILayout.HelpBox("ProjectContext does not found.\nGenerator will generate without namespace prefix.\nTo generate ProjectContextEntity if you need prepend namespace prefix to scripts.", MessageType.Info);
+                EditorGUILayout.Space();
+            }
             if (GUILayout.Button("Generate"))
             {
                 classStructure?.Generate(Overwrite);
