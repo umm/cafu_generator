@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using CAFU.Generator.Enumerates;
-using PretendLand.Common.Projects.Data.Entity;
 using UnityEditor;
 using UnityEngine;
 using UnityModule.ContextManagement;
@@ -26,7 +25,7 @@ namespace CAFU.Generator
 
         public static IList<string> SceneNameList { get; private set; } = new List<string>();
 
-        public static ProjectContext ProjectContext { get; private set; }
+        public static IProjectContext ProjectContext { get; private set; }
 
         private int CurrentStructureIndex { get; set; }
 
@@ -117,25 +116,21 @@ namespace CAFU.Generator
                 .Where(x => x != null)
                 .ToDictionary(x => x.Name, x => x);
             // 未選択状態を作っておく
-            ClassStructureMap.Add("-", null);
+            ClassStructureMap.Add(" ", null);
             StructureKeyList = ClassStructureMap.Keys.OrderBy(x => x).ToList();
 
             // プロジェクト情報を取得
-            var projectContextEntity = Resources.Load<ProjectContextEntity>("Entities/ProjectContextEntity");
-            if (projectContextEntity == null)
-            {
-                projectContextEntity = CreateInstance<ProjectContextEntity>();
-            }
-
-            ProjectContext = projectContextEntity.Value;
+            // ReSharper disable once SuspiciousTypeConversion.Global
+            ProjectContext = Resources.Load("ProjectContextEntity") as IProjectContext;
 
             // シーン名を収集
             SceneNameList = AssetDatabase
                 .FindAssets("t:Scene", new[] {"Assets/Scenes"})
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Select(Path.GetFileNameWithoutExtension)
-                .Where(x => Regex.IsMatch(x, $"^{projectContextEntity.Value.SceneNamePrefix}"))
-                .Select(x => Regex.Replace(x, $"^{projectContextEntity.Value.SceneNamePrefix}", string.Empty))
+                .Where(x => Regex.IsMatch(x, $"^{ProjectContext?.SceneNamePrefix}"))
+                .Select(x => Regex.Replace(x, $"^{ProjectContext?.SceneNamePrefix}", string.Empty))
+                .Prepend(" ")
                 .ToList();
         }
     }
