@@ -23,12 +23,12 @@ yarn add "umm-projects/cafu_generator#^1.0.0"
 
 ### Options
 
-| Name | Description | Controller | Presenter | View | UseCase | Model | Translator | Repository | DataStore | Entity |
+| Name　　　　　　　　　　 | Description　　　　　　　　　　　　　　　 | Controller | Presenter | View | UseCase | Model | Translator | Repository | DataStore | Entity |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Structure Type | Structure (class) type to generate | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Scene Name | Scene name what generated class belongs | ✓ | ✓ | ✓ |  |  |  |  |  |  |
 | Class Name | Name of class |  |  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Is Singleton? | Enable if use `ISingleton` |  |  |  | ✓ |  | ✓ | ✓ | ✓ | ✓ |
+| Is Singleton? | Enable if use `ISingleton` |  |  |  | ✓ | ✓ |  | ✓ | ✓ | ✓ |
 | Use Presenter Factory? | Enable if need to generate Factory class for Presenter | ✓ |  |  |  |  |  |  |  |  |
 | Use Factory? | Enable if need to generate Factory class |  | ✓ |  | ✓ | ✓ |  | ✓ | ✓ | ✓ |
 | Overwrite? | Overwrite file if already exists | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
