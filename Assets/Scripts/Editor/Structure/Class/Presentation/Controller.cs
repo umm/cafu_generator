@@ -45,7 +45,7 @@ namespace CAFU.Generator.Structure.Class.Presentation
             GeneratorWindow.GetAdditionalStructureExtensionDelegateList(LayerType)?.ToList().ForEach(x => x(parameter));
 
             parameter.UsingList.Add("CAFU.Core.Presentation.View");
-            parameter.UsingList.Add($"{GeneratorWindow.ProjectContext.NamespacePrefix.Trim('.')}.{ParentLayerType.ToString()}.{LayerType.Presenter.ToString()}");
+            parameter.UsingList.Add($"{CreateNamespacePrefix()}{ParentLayerType.ToString()}.{LayerType.Presenter.ToString()}");
 
             var generator = new ScriptGenerator(parameter, CreateTemplatePath(TemplateType.Class, StructureName));
             generator.Generate(CreateOutputPath(parameter));
@@ -53,7 +53,7 @@ namespace CAFU.Generator.Structure.Class.Presentation
             new Presenter(CurrentSceneNameIndex, HasPresenterFactory).Generate(overwrite);
         }
 
-        protected override string CreateNamespace(Parameter parameter) => $"{GeneratorWindow.ProjectContext.NamespacePrefix.Trim('.')}.{ParentLayerType.ToString()}.{LayerType.View.ToString()}.{parameter.SceneName}";
+        protected override string CreateNamespace(Parameter parameter) => $"{CreateNamespacePrefix()}{ParentLayerType.ToString()}.{LayerType.View.ToString()}.{parameter.SceneName}";
 
         protected override string CreateOutputPath(Parameter parameter) => Path.Combine(Application.dataPath, OutputDirectory, parameter.ParentLayerType.ToString(), parameter.LayerType.ToString(), parameter.SceneName, $"{parameter.ClassName}{ScriptExtension}");
     }
