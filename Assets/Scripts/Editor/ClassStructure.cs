@@ -1,12 +1,9 @@
 ﻿using System.IO;
 using CAFU.Generator.Enumerates;
-using UnityEngine;
-using UnityModule.ContextManagement;
 
 namespace CAFU.Generator
 {
-
-    public interface IClassStructure
+    public interface IClassStructure : IStructure
     {
         string Name { get; }
 
@@ -15,7 +12,7 @@ namespace CAFU.Generator
         void Generate(bool overwrite);
     }
 
-    public interface IClassStructureExtension
+    public interface IClassStructureExtension : IStructure
     {
         void OnGUI();
 
@@ -40,18 +37,8 @@ namespace CAFU.Generator
 
         public abstract void Generate(bool overwrite);
 
-        protected virtual string CreateNamespace(Parameter parameter) => $"{CreateNamespacePrefix()}{ParentLayerType.ToString()}.{LayerType.ToString()}";
+        protected virtual string CreateNamespace(Parameter parameter) => $"{this.CreateNamespacePrefix()}{ParentLayerType.ToString()}.{LayerType.ToString()}";
 
-        protected virtual string CreateOutputPath(Parameter parameter) => Path.Combine(Application.dataPath, OutputDirectory, parameter.ParentLayerType.ToString(), parameter.LayerType.ToString(), $"{parameter.ClassName}{ScriptExtension}");
-
-        protected static string CreateNamespacePrefix()
-        {
-            if (GeneratorWindow.ProjectContext == default(IProjectContext))
-            {
-                return string.Empty;
-            }
-
-            return $"{GeneratorWindow.ProjectContext.NamespacePrefix.Trim('.')}.";
-        }
+        protected virtual string CreateOutputPath(Parameter parameter) => Path.Combine(UnityEngine.Application.dataPath, OutputDirectory, parameter.ParentLayerType.ToString(), parameter.LayerType.ToString(), $"{parameter.ClassName}{ScriptExtension}");
     }
 }

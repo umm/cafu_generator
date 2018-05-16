@@ -12,11 +12,12 @@
         Presentation,
         Domain,
         Data,
+        Other,
     }
 
     public enum LayerType
     {
-        Enumerates,
+        Enumerate,
         Constants,
         View,
         Presenter,
@@ -27,6 +28,7 @@
         Repository,
         DataStore,
         Entity,
+        Other,
     }
 
     public enum Accessibility

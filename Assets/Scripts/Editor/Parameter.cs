@@ -34,6 +34,7 @@ namespace CAFU.Generator
         public struct Property
         {
             internal Accessibility Accessibility { get; set; }
+            internal string Interface { get; set; }
             internal string Type { get; set; }
             internal string Name { get; set; }
         }
@@ -70,7 +71,7 @@ namespace CAFU.Generator
                   .Aggregate(
                       string.Empty,
                       // setter を private に制限している
-                      (a, b) => $"{a}{ScriptGenerator.Indent(indentLevel)}{b.Accessibility.ToString().ToLower()} I{b.Type} {b.Name} {{ get; private set; }}\n"
+                      (a, b) => $"{a}{ScriptGenerator.Indent(indentLevel)}{b.Accessibility.ToString().ToLower()} {b.Interface} {b.Name} {{ get; private set; }}\n"
                   );
 
         public static string CreateInitializers(this Parameter parameter, int indentLevel) => parameter.PropertyList.IsEmpty()
