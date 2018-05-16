@@ -17,7 +17,7 @@
 
     public enum LayerType
     {
-        Enumerates,
+        Enumerate,
         Constants,
         View,
         Presenter,
