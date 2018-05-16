@@ -5,7 +5,6 @@ using CAFU.Generator.Structure.Partial;
 using ExtraLinq;
 using JetBrains.Annotations;
 using UnityEditor;
-using UnityEngine;
 
 namespace CAFU.Generator.Structure.Class.Presentation
 {
@@ -59,8 +58,8 @@ namespace CAFU.Generator.Structure.Class.Presentation
             generator.Generate(CreateOutputPath(parameter));
         }
 
-        protected override string CreateNamespace(Parameter parameter) => $"{CreateNamespacePrefix()}{ParentLayerType.ToString()}.{LayerType.View.ToString()}.{parameter.SceneName}";
+        protected override string CreateNamespace(Parameter parameter) => $"{this.CreateNamespacePrefix()}{ParentLayerType.ToString()}.{LayerType.View.ToString()}.{parameter.SceneName}";
 
-        protected override string CreateOutputPath(Parameter parameter) => Path.Combine(Application.dataPath, OutputDirectory, parameter.ParentLayerType.ToString(), parameter.LayerType.ToString(), parameter.SceneName, $"{parameter.ClassName}{ScriptExtension}");
+        protected override string CreateOutputPath(Parameter parameter) => Path.Combine(UnityEngine.Application.dataPath, OutputDirectory, parameter.ParentLayerType.ToString(), parameter.LayerType.ToString(), parameter.SceneName, $"{parameter.ClassName}{ScriptExtension}");
     }
 }

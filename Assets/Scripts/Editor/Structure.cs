@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using CAFU.Generator.Enumerates;
-using UnityEngine;
+using UnityModule.ContextManagement;
 
 namespace CAFU.Generator
 {
@@ -23,7 +23,7 @@ namespace CAFU.Generator
         {
             // プロジェクト側のファイルを走査
             var path = Path.Combine(
-                Application.dataPath,
+                UnityEngine.Application.dataPath,
                 TemplateDirectory,
                 templateType.ToString(),
                 // Windows 用に念のためディレクトリセパレータを置換
@@ -36,10 +36,9 @@ namespace CAFU.Generator
 
             // umm 側のファイルを走査
             path = Path.Combine(
-                Application.dataPath,
+                UnityEngine.Application.dataPath,
                 ModuleDirectory,
                 ModuleName,
-//                "CAFU/Generator",
                 TemplateDirectory,
                 templateType.ToString(),
                 // Windows 用に念のためディレクトリセパレータを置換
@@ -51,6 +50,19 @@ namespace CAFU.Generator
             }
 
             throw new FileNotFoundException("Template file not found.", path);
+        }
+    }
+
+    public static class StructureExtension
+    {
+        public static string CreateNamespacePrefix(this IStructure structure)
+        {
+            if (GeneratorWindow.ProjectContext == default(IProjectContext))
+            {
+                return string.Empty;
+            }
+
+            return $"{GeneratorWindow.ProjectContext.NamespacePrefix.Trim('.')}.";
         }
     }
 }
