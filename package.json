@@ -1,6 +1,6 @@
 {
   "name": "@umm/cafu_generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "C# script generator for CAFU",
   "homepage": "https://github.com/umm-projects/cafu_generator",
   "bugs": {
