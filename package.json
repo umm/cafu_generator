@@ -7,9 +7,9 @@
     "url": "https://github.com/umm-projects/cafu_generator/issues"
   },
   "scripts": {
-    "umm:init": "$(npm bin)/umm-init",
-    "umm:install": "$(npm bin)/umm-install",
-    "umm:uninstall": "$(npm bin)/umm-uninstall",
+    "umm:init": "umm-init",
+    "umm:install": "umm-install",
+    "umm:uninstall": "umm-uninstall",
     "postinstall": "npm run --silent umm:install",
     "postuninstall": "npm run --silent umm:uninstall"
   },
