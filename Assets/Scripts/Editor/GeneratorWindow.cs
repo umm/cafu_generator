@@ -43,6 +43,7 @@ namespace CAFU.Generator
             {
                 AdditionalOptionRenderDelegateListMap[layerType] = new List<Action>();
             }
+
             AdditionalOptionRenderDelegateListMap[layerType].Add(classStructureExtension.OnGUI);
         }
 
@@ -52,6 +53,7 @@ namespace CAFU.Generator
             {
                 AdditionalStructureExtensionDelegateListMap[layerType] = new List<Action<Parameter>>();
             }
+
             AdditionalStructureExtensionDelegateListMap[layerType].Add(classStructureExtension.Process);
         }
 
@@ -61,6 +63,7 @@ namespace CAFU.Generator
             {
                 AdditionalOptionRenderDelegateListMap[layerType] = new List<Action>();
             }
+
             return AdditionalOptionRenderDelegateListMap[layerType];
         }
 
@@ -70,6 +73,7 @@ namespace CAFU.Generator
             {
                 AdditionalStructureExtensionDelegateListMap[layerType] = new List<Action<Parameter>>();
             }
+
             return AdditionalStructureExtensionDelegateListMap[layerType];
         }
 
@@ -92,6 +96,7 @@ namespace CAFU.Generator
                 EditorGUILayout.HelpBox("ProjectContext does not found.\nGenerator will generate without namespace prefix.\nTo generate ProjectContextEntity if you need prepend namespace prefix to scripts.", MessageType.Info);
                 EditorGUILayout.Space();
             }
+
             if (GUILayout.Button("Generate"))
             {
                 classStructure?.Generate(Overwrite);
@@ -126,7 +131,14 @@ namespace CAFU.Generator
 
             // プロジェクト情報を取得
             // ReSharper disable once SuspiciousTypeConversion.Global
-            ProjectContext = Resources.Load("ProjectContextEntity") as IProjectContext;
+            var projectContextEntityPath = AssetDatabase
+                .FindAssets("t:ScriptableObject", new[] {"Assets"})
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .FirstOrDefault(x => Regex.IsMatch(x, "ProjectContextEntity\\.asset"));
+            if (!string.IsNullOrEmpty(projectContextEntityPath))
+            {
+                ProjectContext = AssetDatabase.LoadAssetAtPath<ScriptableObject>(projectContextEntityPath) as IProjectContext;
+            }
 
             // シーン名を収集
             SceneNameList = AssetDatabase
