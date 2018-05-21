@@ -131,14 +131,12 @@ namespace CAFU.Generator
 
             // プロジェクト情報を取得
             // ReSharper disable once SuspiciousTypeConversion.Global
-            var projectContextEntityPath = AssetDatabase
+            ProjectContext = AssetDatabase
                 .FindAssets("t:ScriptableObject", new[] {"Assets"})
                 .Select(AssetDatabase.GUIDToAssetPath)
-                .FirstOrDefault(x => Regex.IsMatch(x, "ProjectContextEntity\\.asset"));
-            if (!string.IsNullOrEmpty(projectContextEntityPath))
-            {
-                ProjectContext = AssetDatabase.LoadAssetAtPath<ScriptableObject>(projectContextEntityPath) as IProjectContext;
-            }
+                .Select(AssetDatabase.LoadAssetAtPath<ScriptableObject>)
+                .OfType<IProjectContext>()
+                .FirstOrDefault();
 
             // シーン名を収集
             SceneNameList = AssetDatabase
