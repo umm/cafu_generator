@@ -17,7 +17,7 @@ yarn add "umm-projects/cafu_generator#^1.0.0"
 
 ## Usage
 
-[Youtube](https://www.youtube.com/watch?v=42t5AN8KcwM)
+[![Youtube Video](https://img.youtube.com/vi/42t5AN8KcwM/0.jpg)](https://www.youtube.com/watch?v=42t5AN8KcwM)
 
 * `Window` &gt; `CAFU` &gt; `Script Generator` <br />![image](https://user-images.githubusercontent.com/838945/40044057-3ce37f3a-5861-11e8-8dba-662322731b78.png)
 * Select or Input options.<br />![image](https://user-images.githubusercontent.com/838945/40044135-7410cada-5861-11e8-9859-3fac06895064.png)
