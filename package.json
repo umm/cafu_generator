@@ -10,8 +10,8 @@
     "umm:init": "umm-init",
     "umm:install": "umm-install",
     "umm:uninstall": "umm-uninstall",
-    "postinstall": "npm run --silent umm:install",
-    "postuninstall": "npm run --silent umm:uninstall"
+    "postinstall": "npm run --silent umm:module:install",
+    "postuninstall": "npm run --silent umm:module:uninstall"
   },
   "author": "Tetsuya Mori",
   "license": "MIT",
