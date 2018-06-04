@@ -33,10 +33,10 @@ namespace CAFU.Generator
 
         public struct Property
         {
-            internal Accessibility Accessibility { get; set; }
-            internal string Interface { get; set; }
-            internal string Type { get; set; }
-            internal string Name { get; set; }
+             public Accessibility Accessibility { get; set; }
+             public string Interface { get; set; }
+             public string Type { get; set; }
+             public string Name { get; set; }
         }
     }
 
