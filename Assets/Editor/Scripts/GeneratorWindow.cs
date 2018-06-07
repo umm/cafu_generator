@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using CAFU.Generator.Enumerates;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 using UnityModule.ContextManagement;
 
 namespace CAFU.Generator
 {
+    [PublicAPI]
     public class GeneratorWindow : EditorWindow
     {
         private static IDictionary<string, IClassStructure> ClassStructureMap { get; set; } = new Dictionary<string, IClassStructure>();
@@ -108,19 +109,21 @@ namespace CAFU.Generator
         private void OnEnable()
         {
             // クラス構成設定を収集
-            ClassStructureMap = Assembly
-                .GetAssembly(typeof(GeneratorWindow))
-                .GetTypes()
+            ClassStructureMap = AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SelectMany(x => x.GetTypes())
                 // IClassStructure の実装型を返す
                 .Where(x => typeof(IClassStructure).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract)
                 .Select(x => Activator.CreateInstance(x) as IClassStructure)
                 .Where(x => x != null)
                 .ToDictionary(x => x.Name, x => x);
             // 部分構成設定を収集
-            PartialStructureMap = Assembly
-                .GetAssembly(typeof(GeneratorWindow))
-                .GetTypes()
-                // IClassStructure の実装型を返す
+            PartialStructureMap = AppDomain
+                .CurrentDomain
+                .GetAssemblies()
+                .SelectMany(x => x.GetTypes())
+                // IPartialStructure の実装型を返す
                 .Where(x => typeof(IPartialStructure).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract)
                 .Select(x => Activator.CreateInstance(x) as IPartialStructure)
                 .Where(x => x != null)
