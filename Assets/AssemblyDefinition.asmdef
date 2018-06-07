@@ -1,9 +1,6 @@
 {
     "name": "umm@cafu_generator",
-    "references": [
-        "umm@context_management",
-        "umm@extra_linq"
-    ],
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
