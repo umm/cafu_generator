@@ -4,12 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CAFU.Generator.Enumerates;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 using UnityModule.ContextManagement;
 
 namespace CAFU.Generator
 {
+    [PublicAPI]
     public class GeneratorWindow : EditorWindow
     {
         private static IDictionary<string, IClassStructure> ClassStructureMap { get; set; } = new Dictionary<string, IClassStructure>();
